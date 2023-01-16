@@ -1,3 +1,4 @@
+# url: https://github.com/gxelab/orftools/blob/main/ncorf_classifier3.py
 import sys
 import re
 import gzip
