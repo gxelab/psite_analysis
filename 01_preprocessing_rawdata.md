@@ -1,10 +1,10 @@
 #### Rename raw data files based on sample names
 ```bash
-# Kronja2014
+# Kronja et al., 2014
 mv SRR1039771.fastq.gz activatedegg_chx_rpf.fq.gz
 mv SRR1039768.fastq.gz activatedegg_nochx_rpf.fq.gz
 
-# Patraquim2022
+# Patraquim et al., 2022
 mv SRR19387512.fastq.gz embryo_early_rpf.fq.gz
 mv SRR19387513.fastq.gz embryo_early_rna.fq.gz
 
@@ -14,7 +14,7 @@ mv SRR19387520.fastq.gz embryo_mid_rpf.fq.gz
 mv SRR19387519.fastq.gz embryo_late_rpf.fq.gz
 mv SRR19387518.fastq.gz embryo_late_rna.fq.gz
 
-# Zhang2018
+# Zhang et al., 2018
 mv SRR3031124.fastq.gz embryo_2h_rpf.fq.gz
 mv SRR5075630.fastq.gz embryo_2h_rna.fq.gz
 
@@ -46,7 +46,7 @@ cutadapt -a TGGAATTCTCGGGTGCCAAGG -j8 --trim-n -m 18 -o embryo_24h_rpf.trim.fq.g
 ```
 
 #### filter rRNAs and tRNAs
-rRNA and tRNA sequences were downloaded from FlyBase (http://ftp.flybase.net/releases/FB2022_04/dmel_r6.47/) and combined to a single fasta.
+rRNA and tRNA sequences were downloaded from FlyBase and combined to a single fasta.
 ```r
 library(Biostrings)
 trna <- readDNAStringSet('dmel-all-tRNA-r6.47.fasta.gz')
