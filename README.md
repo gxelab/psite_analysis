@@ -34,10 +34,12 @@ Sequences and annotations:
 - R v4.1.3
 - Module [ncorf_classifer3.py](https://github.com/gxelab/orftools/blob/main/ncorf_classifier3.py)
 - Module [gtf.py](https://github.com/mt1022/GPP/blob/main/gpp/gtf.py)
+- Module [bigwig_covpn.py](https://github.com/gxelab/scripts/blob/main/bigwig_covpn.py)
 
 #### Scripts
 - 01: raw data processing;
 - 02: run the PSite (train + prediction);
 - 03: predict translated ORFs with Ribo-TISH and RiboCode using the default pipeline;
 - 04: predict translated ORFs with Ribo-TISH and RiboCode using the PSite pipeline;
-- 05：code to generate priliminary version of figure 1;
+- 05: metagene profile analysis of P-site coverage around CDS start codons;
+- 06：code to generate plots shown in figure 1;
