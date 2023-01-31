@@ -1,4 +1,4 @@
-# Code for PSite manuscript
+# Data links and Code for PSite manuscript
 
 #### Public data analyzed in the manuscript
 Ribo-Seq and RNA-Seq datasets:
