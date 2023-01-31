@@ -137,3 +137,54 @@ ggsave('figures/figure_1.pdf', width = 12, height = 3)
 x <- plt2 |> filter(name == 'total') |> 
     pivot_wider(names_from = pipeline, values_from = value, id_cols = sample)
 wilcox.test(x$Default, x$PSite, paired = TRUE)
+
+
+# plot metagene profile =======================================================
+salmon_quant <- read_tsv('psite_data/embryo_2h_rna/quant.sf')
+salmon_quant <- salmon_quant |> 
+  select(tx_name = Name, tpm = TPM) |>
+  inner_join(dmel_txinfo, by = join_by(tx_name)) |> 
+  filter(gene_biotype == 'protein_coding') |> 
+  group_by(gene_id) |> 
+  slice_max(tpm) |>
+  filter(cds_len >= 0, utr5_len >= 20, utr3_len >= 20, tpm > 1)
+
+get_metagene_profile <- function(covpath){
+  covpn <- read_tsv(covpath, col_names = FALSE)
+  covpn <- covpn |>
+    select(tx_name = X4, cov = X8) |>
+    filter(tx_name %in% salmon_quant$tx_name) |> 
+    separate_longer_delim(cov, delim = ',') |> 
+    group_by(tx_name) |> 
+    mutate(posn = row_number(), cov = as.integer(cov)) |> 
+    filter(cov > 0)
+  
+  plt <- salmon_quant |> 
+    mutate(cds_start = utr5_len + 1) |> 
+    select(tx_name, cds_start) |>
+    inner_join(covpn, by = 'tx_name', multiple = 'all') |> 
+    mutate(relpos = posn - cds_start) |> 
+    filter(relpos >= -15, relpos <= 32) |> 
+    group_by(relpos) |> 
+    summarize(total = sum(cov))
+  return(plt)
+}
+
+mg_psite <- get_metagene_profile('psite_data/embryo_2h_rpf_Aligned.sortedByCoord.psite.txcov.tsv')
+mg_peak <- get_metagene_profile('psite_data/embryo_2h_rpf_Aligned.sortedByCoord.peak.txcov.tsv')
+mg_fixed <- get_metagene_profile('psite_data/embryo_2h_rpf_Aligned.sortedByCoord.fixed.txcov.tsv')
+
+mg_all <- bind_rows('Fixed' = mg_fixed, 'Peak' = mg_peak, 'PSite' = mg_psite, .id = 'method')
+
+ggplot(mg_all, aes(x = relpos, y = total, fill = factor(relpos %% 3))) +
+  geom_col() +
+  scale_fill_brewer(palette = 'Greys',direction = -1) +
+  scale_y_continuous(
+    labels = scales::label_number(scale = 1/1000, suffix = 'k'),
+    expand = expansion(mult = c(0, 0.05))) +
+  facet_wrap(vars(method), scales = 'free') +
+  labs(x = 'Distance to start codon (nt)', y = 'P-site coverage', fill = 'Frame') +
+  theme_classic(base_size = 12) +
+  theme(strip.background = element_blank(),
+        axis.text = element_text(color = 'black'))
+ggsave('figures/psite_metagene_profile.pdf', width = 10, height = 3)
