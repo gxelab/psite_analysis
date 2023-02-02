@@ -32,7 +32,7 @@ Sequences and annotations:
 - [Ribo-TISH](https://github.com/zhpn1024/ribotish) dev (2022-08-11)
 - python v3.9.10
 - R v4.1.3
-- Module [ncorf_classifer3.py](https://github.com/gxelab/orftools/blob/main/ncorf_classifier3.py)
+- Module [ncorf_classifer3.py](https://github.com/gxelab/scripts/blob/main/ncorf_classifier3.py)
 - Module [gtf.py](https://github.com/mt1022/GPP/blob/main/gpp/gtf.py)
 - Module [bigwig_covpn.py](https://github.com/gxelab/scripts/blob/main/bigwig_covpn.py)
 
