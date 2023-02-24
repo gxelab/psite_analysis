@@ -23,6 +23,7 @@ Sequences and annotations:
 
 
 #### Software
+Public software
 - [cutadapt](https://github.com/marcelm/cutadapt) v3.7
 - [bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml) v2.4.5
 - [STAR](https://github.com/alexdobin/STAR) 2.7.4a
@@ -32,7 +33,9 @@ Sequences and annotations:
 - [Ribo-TISH](https://github.com/zhpn1024/ribotish) dev (2022-08-11)
 - python v3.9.10
 - R v4.1.3
-- Module [ncorf_classifer3.py](https://github.com/gxelab/scripts/blob/main/ncorf_classifier3.py)
+
+In-house modules (copies available in the `src` folder of this repo):
+- Module [ncorf_classifer3.py](https://github.com/gxelab/scripts/blob/main/orf_type.py)
 - Module [gtf.py](https://github.com/mt1022/GPP/blob/main/gpp/gtf.py)
 - Module [bigwig_covpn.py](https://github.com/gxelab/scripts/blob/main/bigwig_covpn.py)
 
